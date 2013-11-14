@@ -61,6 +61,14 @@ var ConnectionHandlers = {
 
 };
 
+var SocketIoAdapter = {
+
+  onConnectionOpened: function(socket) {
+    console.log(socket);
+  }
+
+};
+
 var ActionHandlers = {
 
   handleConnect: function(connection, message) {

@@ -2,8 +2,5 @@
   "name": "TheIsland",
   "description": "A communication layer for a system that uses Paxos",
   "author": "Mark Fielbig <mfielbig@gmail.com>",
-  "dependencies": {
-    "socket.io": "*"
-  },
   "engine": "node 0.10.20"
 }
