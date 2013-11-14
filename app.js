@@ -97,6 +97,7 @@ var ActionHandlers = {
           providers[i].connection.write(JSON.stringify(message) + '\r\n');
         }
       }
+      ActionHandlers.handleGeneric(connection, message);
     } catch (e) {
       console.log('Error handling request message:', message, e); 
     }

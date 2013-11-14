@@ -1,7 +1,7 @@
 import api
 
 print('Connecting to API...')
-api.connect_as_application('visualizer', 'response')
+api.connect_as_application('application', 'response')
 
 print('Requesting vertical paxos...')
 api.request('vertical-paxos', 0, 0, 3)
