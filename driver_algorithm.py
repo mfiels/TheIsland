@@ -1,7 +1,11 @@
 import api
 
 print('Connecting to API...')
-api.connect_as_algorithm('vertical-paxos', 3, 3, 3)
+api.connect_as_algorithm(
+  'vertical-paxos', 
+  [0, 1, 2], 
+  [3, 4, 5, 6, 7], 
+  [8, 9, 10, 11])
 
 print('Waiting for requests...')
 request = api.wait_for_request()

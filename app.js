@@ -45,10 +45,9 @@ var ConnectionHandlers = {
       var action = message.action;
       var actionHandler = 'handle' + action[0].toUpperCase() + action.substring(1).toLowerCase();
       
+      ActionHandlers.handleGeneric(connection, message);
       if (ActionHandlers[actionHandler]) {
         ActionHandlers[actionHandler](connection, message);
-      } else {
-        ActionHandlers.handleGeneric(connection, message);
       }
     } catch (e) {
       console.log('Error parsing client message:', data, e);
@@ -97,7 +96,6 @@ var ActionHandlers = {
           providers[i].connection.write(JSON.stringify(message) + '\r\n');
         }
       }
-      ActionHandlers.handleGeneric(connection, message);
     } catch (e) {
       console.log('Error handling request message:', message, e); 
     }

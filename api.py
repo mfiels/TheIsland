@@ -4,12 +4,12 @@ import time
 
 connection = None
 
-def connect_as_algorithm(name, num_proposers, num_acceptors, num_learners):
+def connect_as_algorithm(name, proposer_ids, acceptor_ids, learner_ids):
   base = dict()
   base['configuration'] = dict()
-  base['configuration']['proposers'] = num_proposers
-  base['configuration']['acceptors'] = num_acceptors
-  base['configuration']['learners'] = num_learners
+  base['configuration']['proposers'] = proposer_ids
+  base['configuration']['acceptors'] = acceptor_ids
+  base['configuration']['learners'] = learner_ids
   __connect__('algorithm', name, base)
 
 def connect_as_application(name, *interests):
@@ -29,8 +29,8 @@ def __connect__(type, name, base):
     message['name'] = name
 
     __send__(message)
-  except:
-    print('Error connecting to API')
+  except Exception as e:
+    print('Error connecting to API: ' + str(e))
 
 def request(algorithm, id, cid, value):
   message = dict()
@@ -95,8 +95,8 @@ def __send__(base):
     base['time'] = int(time.time())
     json_str = json.dumps(base) + '\r\n'
     connection.send(json_str.encode('ascii'))
-  except:
-    print('Error sending to API')
+  except Exception as e:
+    print('Error sending to API: ' + str(e))
 
 def wait_for_request():
   return __recv__('request')
@@ -111,8 +111,8 @@ def __recv__(type):
       message = json.loads(connection.recv(4096).decode('ascii'))
       if message['action'] == type:
         return message
-  except:
-    print('Error receiving from API')
+  except Exception as e:
+    print('Error receiving from API: ' + str(e))
 
 
 def disconnect():
@@ -120,5 +120,5 @@ def disconnect():
     global connection
     connection.close()
     connection = None
-  except:
-    print('Error disconnecting from API')
+  except Exception as e:
+    print('Error disconnecting from API: ' + str(e))
